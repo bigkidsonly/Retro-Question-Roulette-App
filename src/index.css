@@ -1,0 +1,285 @@
+/* PLEASE NOTE: THESE TAILWIND IMPORTS SHOULD NEVER BE DELETED */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+/* DO NOT DELETE THE ABOVE TAILWIND IMPORTS, OTHERWISE THE STYLING WILL NOT RENDER AT ALL */
+/**
+* Copy and paste a Shadcn Theme from
+* https://ui.jln.dev/ 
+* OR 
+* https://ui.shadcn.com/themes
+*
+* It should start with:
+* /* Neon Retro Hackathon Question Bank Stylesheet */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@400;700;900&display=swap');
+:root {
+  /* Neon Color Palette */
+  --neon-cyan: #00ffff;
+  --neon-pink: #ff00ff;
+  --neon-green: #00ff00;
+  --neon-orange: #ff8000;
+  --neon-purple: #8000ff;
+  --neon-blue: #0080ff;
+  /* Dark Base Colors */
+  --dark-bg: #0a0a0f;
+  --dark-surface: #1a1a2e;
+  --dark-accent: #16213e;
+  --grid-color: #16213e;
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #b4b4b8;
+  --text-accent: var(--neon-cyan);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+/* Animated Grid Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(22, 33, 62, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 33, 62, 0.3) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+  z-index: -2;
+}
+/* Animated Gradient Overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 20% 80%,
+    rgba(255, 0, 255, 0.1) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 80% 20%,
+    rgba(0, 255, 255, 0.1) 0%,
+    transparent 50%
+  );
+  z-index: -1;
+}
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+/* Main Container */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+/* Header Styling */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.title {
+  font-family: 'Orbitron', monospace;
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink), var(--neon-green));
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease-in-out infinite;
+  text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+/* Question Card */
+.question-card {
+  background: rgba(26, 26, 46, 0.8);
+  border: 2px solid var(--neon-cyan);
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 0 30px rgba(0, 255, 255, 0.3),
+    inset 0 0 30px rgba(0, 255, 255, 0.1);
+  animation: cardGlow 4s ease-in-out infinite alternate;
+}
+.question-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink), var(--neon-green), var(--neon-cyan));
+  background-size: 400% 400%;
+  border-radius: 12px;
+  z-index: -1;
+  animation: borderRotate 8s linear infinite;
+}
+@keyframes cardGlow {
+  0% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.3), inset 0 0 30px rgba(0, 255, 255, 0.1); }
+  100% { box-shadow: 0 0 50px rgba(0, 255, 255, 0.5), inset 0 0 50px rgba(0, 255, 255, 0.2); }
+}
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 50% 100%; }
+  100% { background-position: 0% 50%; }
+}
+/* Question Text */
+.question-text {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--text-primary);
+  font-weight: 400;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+/* Terminal-style brackets */
+.question-text::before {
+  content: '> ';
+  color: var(--neon-green);
+  font-weight: 700;
+}
+.question-text::after {
+  content: ' _';
+  color: var(--neon-green);
+  animation: blink 1.5s infinite;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+/* Button Styling */
+.new-question-btn {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 1rem 2rem;
+  background: transparent;
+  color: var(--neon-cyan);
+  border: 2px solid var(--neon-cyan);
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.new-question-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+  transition: left 0.5s ease;
+}
+.new-question-btn:hover {
+  color: var(--dark-bg);
+  background: var(--neon-cyan);
+  box-shadow: 
+    0 0 30px rgba(0, 255, 255, 0.6),
+    inset 0 0 30px rgba(0, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+.new-question-btn:hover::before {
+  left: 100%;
+}
+.new-question-btn:active {
+  transform: translateY(0);
+}
+/* Decorative Elements */
+.code-brackets {
+  position: fixed;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8rem;
+  color: rgba(0, 255, 255, 0.1);
+  pointer-events: none;
+  z-index: -1;
+}
+.bracket-top-left {
+  top: 10%;
+  left: 5%;
+  animation: float 6s ease-in-out infinite;
+}
+.bracket-bottom-right {
+  bottom: 10%;
+  right: 5%;
+  animation: float 6s ease-in-out infinite reverse;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .question-card {
+    padding: 1.5rem;
+  }
+  .question-text {
+    font-size: 1.1rem;
+  }
+  .new-question-btn {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+  .code-brackets {
+    font-size: 4rem;
+  }
+}
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5rem;
+  }
+  .subtitle {
+    font-size: 0.8rem;
+  }
+  .question-text {
+    font-size: 1rem;
+  }
+}
